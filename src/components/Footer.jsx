@@ -1,50 +1,61 @@
 import { CATEGORIES } from '../data/catalog'
 import Brand from './Brand'
-import { ArrowRightIcon } from './Icons'
+import { ArrowRightIcon, LockIcon } from './Icons'
 
 export default function Footer() {
   return (
-    <footer className="mt-24 border-t border-parchment/10 bg-ink-900/50">
-      <div className="container-page py-14 lg:py-16">
-        <div className="grid gap-10 lg:grid-cols-[1.5fr_1fr_1fr] lg:gap-16">
+    <footer className="no-print mt-20 border-t border-ink/10 bg-ink-900/60">
+      <div className="container-page py-12 lg:py-16">
+        <div className="grid gap-10 lg:grid-cols-[1.4fr_0.8fr_0.8fr] lg:gap-16">
           <div>
             <Brand />
-            <p className="mt-6 max-w-sm font-sans text-sm leading-7 text-muted">
-              An independent trading library for comics, games, vintage
-              machines and the parts that keep them alive.
+            <p className="mt-5 max-w-sm text-sm leading-7 text-muted">
+              A friendly demo storefront for gaming chairs, GPUs, pre-owned M4
+              Macs, gaming gear and synthetic Kenyan wordlists. Built to feel
+              calm from first click to checkout.
             </p>
-            <p className="mt-5 font-mono text-[9px] uppercase tracking-[0.24em] text-parchment/50">
-              Nairobi, Kenya · Open for trade
+            <p className="mt-5 inline-flex items-center gap-2 rounded-full bg-brass/10 px-3 py-1.5 text-xs font-bold text-brass">
+              <LockIcon className="h-3.5 w-3.5" />
+              Guest checkout · no account, no calls
             </p>
           </div>
 
           <div>
-            <h2 className="eyebrow">The library</h2>
-            <ul className="mt-5 space-y-3">
+            <h2 className="eyebrow">Shop</h2>
+            <ul className="mt-4 space-y-2.5">
               <li>
                 <a
                   href="#/"
-                  className="group inline-flex items-center gap-2 font-sans text-sm text-parchment/80 transition-colors hover:text-brass-light"
+                  className="group inline-flex items-center gap-2 text-sm font-bold text-muted transition-colors hover:text-brass"
                 >
-                  Browse the index
+                  All products
+                  <ArrowRightIcon className="h-3.5 w-3.5 opacity-0 transition-opacity group-hover:opacity-100" />
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#/cart"
+                  className="group inline-flex items-center gap-2 text-sm font-bold text-muted transition-colors hover:text-brass"
+                >
+                  Your cart
+                  <ArrowRightIcon className="h-3.5 w-3.5 opacity-0 transition-opacity group-hover:opacity-100" />
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#/checkout"
+                  className="group inline-flex items-center gap-2 text-sm font-bold text-muted transition-colors hover:text-brass"
+                >
+                  Quiet checkout
                   <ArrowRightIcon className="h-3.5 w-3.5 opacity-0 transition-opacity group-hover:opacity-100" />
                 </a>
               </li>
               <li>
                 <a
                   href="#/binder"
-                  className="group inline-flex items-center gap-2 font-sans text-sm text-parchment/80 transition-colors hover:text-brass-light"
+                  className="group inline-flex items-center gap-2 text-sm font-bold text-muted transition-colors hover:text-brass"
                 >
-                  Your binder
-                  <ArrowRightIcon className="h-3.5 w-3.5 opacity-0 transition-opacity group-hover:opacity-100" />
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#/account"
-                  className="group inline-flex items-center gap-2 font-sans text-sm text-parchment/80 transition-colors hover:text-brass-light"
-                >
-                  Collector cards
+                  Saved items
                   <ArrowRightIcon className="h-3.5 w-3.5 opacity-0 transition-opacity group-hover:opacity-100" />
                 </a>
               </li>
@@ -53,29 +64,24 @@ export default function Footer() {
 
           <div>
             <h2 className="eyebrow">Departments</h2>
-            <ul className="mt-5 space-y-3">
+            <ul className="mt-4 space-y-2.5">
               {CATEGORIES.map((category) => (
                 <li
                   key={category.id}
-                  className="font-sans text-sm text-parchment/80"
+                  className="text-sm font-bold text-muted"
                 >
                   {category.label}
                 </li>
               ))}
             </ul>
-            <p className="mt-6 max-w-[220px] font-mono text-[9px] leading-5 tracking-[0.08em] text-muted/60">
-              Grades and values are indicative. Terms are confirmed at the
-              desk.
-            </p>
           </div>
         </div>
 
-        <div className="mt-14 flex flex-col gap-4 border-t border-parchment/10 pt-6 sm:flex-row sm:items-center sm:justify-between">
-          <p className="font-mono text-[9px] uppercase tracking-[0.18em] text-muted/70">
-            © {new Date().getFullYear()} Collectibles Kenya
-          </p>
-          <p className="font-mono text-[9px] uppercase tracking-[0.14em] text-muted/50">
-            Preview accounts and binders are kept in this browser
+        <div className="mt-12 flex flex-col gap-3 border-t border-ink/10 pt-6 text-xs leading-5 text-muted sm:flex-row sm:items-center sm:justify-between">
+          <p>© {new Date().getFullYear()} Collectibles Kenya · Demo store</p>
+          <p>
+            No real payments yet · Daraja integration is next · Data stays in
+            this browser
           </p>
         </div>
       </div>

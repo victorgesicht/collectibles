@@ -5,25 +5,33 @@ import { getItemById } from './data/catalog'
 import useHashRoute from './hooks/useHashRoute'
 import AccountPage from './pages/AccountPage'
 import BinderPage from './pages/BinderPage'
+import CartPage from './pages/CartPage'
+import CheckoutPage from './pages/CheckoutPage'
 import HomePage from './pages/HomePage'
 import ItemDetailPage from './pages/ItemDetailPage'
 import NotFoundPage from './pages/NotFoundPage'
+import OrderPage from './pages/OrderPage'
 
 const SITE_NAME = 'Collectibles Kenya'
 
 function getPageTitle(route, item) {
   if (route.page === 'item' && item) {
-    return `${item.title}${item.issue ? ` ${item.issue}` : ''} — ${SITE_NAME}`
+    return `${item.title}${item.issue ? ` · ${item.issue}` : ''} — ${SITE_NAME}`
   }
 
-  if (route.page === 'binder') return `Your Binder — ${SITE_NAME}`
-  if (route.page === 'account') return `Collector Cards — ${SITE_NAME}`
+  if (route.page === 'cart') return `Your Cart — ${SITE_NAME}`
+  if (route.page === 'checkout') return `Quiet Checkout — ${SITE_NAME}`
+  if (route.page === 'order') return `Order ${route.id ?? ''} — ${SITE_NAME}`
+  if (route.page === 'binder') return `Saved Items — ${SITE_NAME}`
+  if (route.page === 'account') return `Account — ${SITE_NAME}`
   if (route.page === 'home') {
-    return `${SITE_NAME} — The Trading Library`
+    return `${SITE_NAME} — Good gear, quietly delivered`
   }
 
-  return `Record Not Found — ${SITE_NAME}`
+  return `Page Not Found — ${SITE_NAME}`
 }
+
+const NOINDEX_PAGES = new Set(['cart', 'checkout', 'order', 'account'])
 
 export default function App() {
   const route = useHashRoute()
@@ -35,6 +43,16 @@ export default function App() {
 
   useEffect(() => {
     document.title = getPageTitle(route, item)
+
+    const robots = document.querySelector('meta[name="robots"]')
+    if (robots) {
+      robots.setAttribute(
+        'content',
+        NOINDEX_PAGES.has(route.page)
+          ? 'noindex, nofollow'
+          : 'index, follow',
+      )
+    }
   }, [route, item])
 
   const handleSkipToContent = (event) => {
@@ -46,6 +64,12 @@ export default function App() {
 
   if (route.page === 'home') {
     pageContent = <HomePage />
+  } else if (route.page === 'cart') {
+    pageContent = <CartPage />
+  } else if (route.page === 'checkout') {
+    pageContent = <CheckoutPage />
+  } else if (route.page === 'order') {
+    pageContent = <OrderPage orderId={route.id} />
   } else if (route.page === 'binder') {
     pageContent = <BinderPage />
   } else if (route.page === 'account') {
@@ -61,7 +85,7 @@ export default function App() {
       <a
         href="#main-content"
         onClick={handleSkipToContent}
-        className="sr-only z-[80] bg-brass px-4 py-3 font-mono text-[10px] uppercase tracking-[0.18em] text-ink-950 focus:not-sr-only focus:fixed focus:left-4 focus:top-4"
+        className="sr-only z-[80] rounded-full bg-brass px-4 py-3 text-sm font-bold text-white focus:not-sr-only focus:fixed focus:left-4 focus:top-4"
       >
         Skip to content
       </a>

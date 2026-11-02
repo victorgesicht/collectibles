@@ -1,314 +1,412 @@
 import { useId } from 'react'
 import { getCategory } from '../data/catalog'
 
-function ComicsMotif({ accent, ink, variant }) {
-  const tilt = variant === 2 ? 2 : variant === 3 ? -2 : -4
+function ChairsMotif({ accent, ink, base, variant }) {
+  const tilt = (variant - 2) * 2.5
 
   return (
-    <g transform={`rotate(${tilt} 180 238)`}>
+    <g transform={`rotate(${tilt} 180 250)`}>
+      <ellipse cx="180" cy="382" rx="88" ry="10" fill={ink} fillOpacity="0.07" />
+      <path
+        d="M180 372v-52M180 338l-70 28M180 338l70 28"
+        fill="none"
+        stroke={ink}
+        strokeOpacity="0.35"
+        strokeWidth="6"
+        strokeLinecap="round"
+      />
+      <g fill={accent} fillOpacity="0.75">
+        <circle cx="110" cy="366" r="7" />
+        <circle cx="142" cy="386" r="7" />
+        <circle cx="218" cy="386" r="7" />
+        <circle cx="250" cy="366" r="7" />
+        <circle cx="180" cy="374" r="6" />
+      </g>
+
       <rect
-        x="80"
-        y="112"
-        width="200"
-        height="252"
-        fill={ink}
-        fillOpacity="0.025"
-        stroke={ink}
-        strokeOpacity="0.28"
-      />
-      <path
-        d="M80 184h200M80 306h200M166 112v72M254 184v108"
-        stroke={ink}
-        strokeOpacity="0.22"
-      />
-      <circle
-        cx="180"
-        cy="238"
-        r="82"
-        fill="none"
-        stroke={accent}
-        strokeWidth="1.2"
-        strokeOpacity="0.9"
-      />
-      <circle
-        cx="180"
-        cy="238"
-        r="58"
-        fill="none"
-        stroke={ink}
-        strokeOpacity="0.3"
-        strokeDasharray="2 7"
-      />
-      <path
-        d="M86 354h188M104 90l152 296"
-        stroke={accent}
-        strokeOpacity="0.3"
-      />
-      <circle cx="80" cy="112" r="3" fill={accent} />
-      <circle cx="280" cy="364" r="3" fill={accent} />
-      <g fill={accent} opacity="0.5">
-        <circle cx="104" cy="140" r="1.5" />
-        <circle cx="112" cy="148" r="1.5" />
-        <circle cx="120" cy="156" r="1.5" />
-        <circle cx="104" cy="156" r="1.5" />
-        <circle cx="112" cy="164" r="1.5" />
-        <circle cx="256" cy="320" r="1.5" />
-        <circle cx="264" cy="312" r="1.5" />
-        <circle cx="272" cy="304" r="1.5" />
-        <circle cx="264" cy="328" r="1.5" />
-        <circle cx="272" cy="320" r="1.5" />
-      </g>
-    </g>
-  )
-}
-
-function GamesMotif({ accent, ink, variant }) {
-  const stars = [
-    [58, 150, 2],
-    [82, 196, 1.5],
-    [70, 286, 1.5],
-    [294, 174, 2],
-    [310, 246, 1.5],
-    [288, 312, 1.5],
-    [104, 352, 1.5],
-    [262, 130, 1.5],
-  ]
-  const shift = (variant - 2) * 6
-
-  return (
-    <g>
-      {stars.map(([cx, cy, radius]) => (
-        <circle
-          key={`${cx}-${cy}`}
-          cx={cx}
-          cy={cy + shift}
-          r={radius}
-          fill={accent}
-          opacity="0.5"
-        />
-      ))}
-      <g transform={`translate(0 ${shift})`}>
-        <rect
-          x="120"
-          y="130"
-          width="120"
-          height="196"
-          rx="7"
-          fill={ink}
-          fillOpacity="0.035"
-          stroke={accent}
-          strokeWidth="1.2"
-        />
-        <path
-          d="M146 130v-8c0-5.5 4.5-10 10-10h48c5.5 0 10 4.5 10 10v8"
-          fill="none"
-          stroke={ink}
-          strokeOpacity="0.4"
-        />
-        <rect
-          x="136"
-          y="158"
-          width="88"
-          height="96"
-          fill={accent}
-          fillOpacity="0.09"
-          stroke={ink}
-          strokeOpacity="0.35"
-        />
-        <path
-          d="M136 266h88M136 294h88"
-          stroke={ink}
-          strokeOpacity="0.22"
-        />
-        <g fill={accent}>
-          <rect x="146" y="214" width="5" height="5" />
-          <rect x="155" y="221" width="5" height="5" />
-          <rect x="164" y="214" width="5" height="5" />
-          <rect x="197" y="214" width="5" height="5" />
-          <rect x="206" y="221" width="5" height="5" />
-          <rect x="215" y="214" width="5" height="5" />
-        </g>
-        <circle cx="152" cy="310" r="3.5" fill={accent} />
-        <circle cx="168" cy="310" r="3.5" fill={ink} opacity="0.3" />
-        <path
-          d="M244 152h24M244 160h16"
-          stroke={ink}
-          strokeOpacity="0.35"
-          strokeLinecap="round"
-        />
-        <path
-          d="M96 344h168"
-          stroke={accent}
-          strokeOpacity="0.3"
-          strokeDasharray="1 7"
-        />
-      </g>
-    </g>
-  )
-}
-
-function ComputersMotif({ accent, ink, variant }) {
-  const screenShift = (variant - 2) * 4
-
-  return (
-    <g>
-      <circle
-        cx="180"
-        cy="236"
-        r="122"
-        fill="none"
-        stroke={ink}
-        strokeOpacity="0.1"
-      />
-      <circle
-        cx="180"
-        cy="236"
-        r="100"
-        fill="none"
-        stroke={accent}
-        strokeOpacity="0.2"
-        strokeDasharray="3 9"
-      />
-      <g transform={`translate(0 ${screenShift})`}>
-        <rect
-          x="88"
-          y="140"
-          width="184"
-          height="142"
-          rx="9"
-          fill={ink}
-          fillOpacity="0.03"
-          stroke={accent}
-          strokeWidth="1.2"
-        />
-        <rect
-          x="104"
-          y="156"
-          width="152"
-          height="98"
-          fill="#090907"
-          fillOpacity="0.75"
-          stroke={ink}
-          strokeOpacity="0.3"
-        />
-        <g stroke={ink} strokeOpacity="0.08">
-          <path d="M104 172h152M104 188h152M104 204h152M104 220h152M104 236h152" />
-        </g>
-        <path
-          d="M122 186h10l7 8 7-8h10"
-          fill="none"
-          stroke={accent}
-          strokeWidth="1.4"
-        />
-        <path
-          d="M122 212h54M122 224h84M122 236h40"
-          stroke={ink}
-          strokeOpacity="0.45"
-          strokeLinecap="round"
-        />
-        <circle cx="250" cy="268" r="2.5" fill={accent} />
-        <path
-          d="M152 282v24h56v-24M134 306h92"
-          fill="none"
-          stroke={ink}
-          strokeOpacity="0.35"
-        />
-      </g>
-      <text
-        x="304"
-        y="156"
-        textAnchor="end"
-        fontFamily="'Fira Code', monospace"
-        fontSize="9"
+        x="108"
+        y="250"
+        width="144"
+        height="58"
+        rx="25"
         fill={accent}
-        opacity="0.65"
+      />
+      <rect
+        x="120"
+        y="118"
+        width="120"
+        height="164"
+        rx="40"
+        fill={accent}
+      />
+      <rect
+        x="136"
+        y="134"
+        width="88"
+        height="132"
+        rx="30"
+        fill={base}
+        stroke={ink}
+        strokeOpacity="0.08"
+      />
+      <rect
+        x="146"
+        y="98"
+        width="68"
+        height="32"
+        rx="16"
+        fill={ink}
+        fillOpacity="0.16"
+      />
+      <path
+        d="M150 168c12-13 48-13 60 0M150 196c12-9 48-9 60 0"
+        fill="none"
+        stroke={accent}
+        strokeWidth="3"
+        strokeLinecap="round"
+        strokeOpacity="0.65"
+      />
+      <rect
+        x="92"
+        y="252"
+        width="26"
+        height="18"
+        rx="9"
+        fill={ink}
+        fillOpacity="0.22"
+      />
+      <rect
+        x="242"
+        y="252"
+        width="26"
+        height="18"
+        rx="9"
+        fill={ink}
+        fillOpacity="0.22"
+      />
+      <path
+        d="M126 272h108"
+        stroke={ink}
+        strokeOpacity="0.12"
+        strokeWidth="3"
+        strokeLinecap="round"
+      />
+    </g>
+  )
+}
+
+function GraphicsCardMotif({ accent, ink, base }) {
+  const fans = [132, 228]
+
+  return (
+    <g>
+      <rect
+        x="54"
+        y="190"
+        width="252"
+        height="104"
+        rx="18"
+        fill={base}
+        stroke={accent}
+        strokeWidth="3"
+      />
+      <rect
+        x="68"
+        y="204"
+        width="224"
+        height="76"
+        rx="12"
+        fill="#ffffff"
+        fillOpacity="0.45"
+      />
+
+      {fans.map((cx) => (
+        <g key={cx}>
+          <circle
+            cx={cx}
+            cy="242"
+            r="30"
+            fill="none"
+            stroke={accent}
+            strokeWidth="3.5"
+          />
+          <circle cx={cx} cy="242" r="7" fill={accent} fillOpacity="0.8" />
+          {[0, 72, 144, 216, 288].map((angle) => (
+            <path
+              key={angle}
+              d={`M${cx} 242c8-12 20-16 26-10`}
+              fill="none"
+              stroke={accent}
+              strokeWidth="3"
+              strokeLinecap="round"
+              strokeOpacity="0.55"
+              transform={`rotate(${angle} ${cx} 242)`}
+            />
+          ))}
+        </g>
+      ))}
+
+      <rect
+        x="78"
+        y="294"
+        width="184"
+        height="12"
+        rx="5"
+        fill={accent}
+        fillOpacity="0.5"
+      />
+      <rect x="48" y="218" width="10" height="52" rx="5" fill={accent} />
+      <circle cx="280" cy="214" r="3" fill={ink} fillOpacity="0.25" />
+      <circle cx="280" cy="270" r="3" fill={ink} fillOpacity="0.25" />
+      <text
+        x="180"
+        y="216"
+        textAnchor="middle"
+        fill={accent}
+        fontFamily="'DM Mono', monospace"
+        fontSize="10"
+        letterSpacing="2"
+        fillOpacity="0.8"
       >
-        SYS.7
+        GPU
       </text>
     </g>
   )
 }
 
-function PartsMotif({ accent, ink, variant }) {
-  const rotation = variant * 5
-
+function MacsMotif({ accent, ink, base }) {
   return (
     <g>
-      <g transform={`rotate(${rotation} 180 234)`}>
-        {Array.from({ length: 24 }, (_, index) => (
-          <line
-            key={index}
-            x1="180"
-            y1="122"
-            x2="180"
-            y2="138"
-            transform={`rotate(${index * 15} 180 234)`}
-            stroke={accent}
-            strokeOpacity="0.45"
-            strokeWidth="1.2"
-          />
-        ))}
-        <circle
-          cx="180"
-          cy="234"
-          r="96"
-          fill="none"
-          stroke={accent}
-          strokeOpacity="0.55"
-          strokeWidth="1.2"
-        />
-        <circle
-          cx="180"
-          cy="234"
-          r="74"
-          fill="none"
-          stroke={ink}
-          strokeOpacity="0.22"
-          strokeDasharray="2 8"
-        />
-      </g>
-      <path
-        d="M180 202l28 16v32l-28 16-28-16v-32l28-16Z"
-        fill={ink}
-        fillOpacity="0.04"
-        stroke={accent}
-        strokeWidth="1.2"
-      />
-      <path
-        d="M152 234H96v-58H60M208 234h56v54h32M180 266v48h-44v36M180 202v-44h40"
-        fill="none"
-        stroke={ink}
-        strokeOpacity="0.28"
-      />
-      <g fill={accent}>
-        <circle cx="60" cy="176" r="3" />
-        <circle cx="296" cy="288" r="3" />
-        <circle cx="136" cy="350" r="3" />
-        <circle cx="220" cy="158" r="3" />
-      </g>
-      <path
-        d="M174 228h12v12h-12z"
+      <rect
+        x="90"
+        y="134"
+        width="180"
+        height="126"
+        rx="14"
         fill={accent}
-        opacity="0.65"
+      />
+      <rect
+        x="102"
+        y="146"
+        width="156"
+        height="102"
+        rx="7"
+        fill={base}
+      />
+      <circle cx="180" cy="252" r="2.5" fill={ink} fillOpacity="0.3" />
+      <text
+        x="180"
+        y="210"
+        textAnchor="middle"
+        fill={accent}
+        fontFamily="'Baloo 2', sans-serif"
+        fontWeight="700"
+        fontSize="34"
+      >
+        M4
+      </text>
+      <path
+        d="M72 264h216l18 32H54l18-32Z"
+        fill={base}
+        stroke={accent}
+        strokeWidth="2.5"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M88 280h184"
+        stroke={accent}
+        strokeOpacity="0.5"
+        strokeWidth="3"
+        strokeLinecap="round"
+        strokeDasharray="4 5"
+      />
+      <rect
+        x="158"
+        y="288"
+        width="44"
+        height="6"
+        rx="3"
+        fill={ink}
+        fillOpacity="0.14"
+      />
+      <circle
+        cx="180"
+        cy="146"
+        r="2"
+        fill={accent}
+        fillOpacity="0.55"
       />
     </g>
   )
 }
 
-function Motif({ category, accent, ink, variant }) {
-  if (category === 'comics') {
-    return <ComicsMotif accent={accent} ink={ink} variant={variant} />
-  }
+function WordlistsMotif({ accent, ink, variant }) {
+  const tilt = variant === 2 ? -3 : 2
+  const badge = variant === 2 ? '1M' : '10M'
+  const lineWidths = [116, 96, 108, 84, 102, 72]
 
-  if (category === 'games') {
-    return <GamesMotif accent={accent} ink={ink} variant={variant} />
-  }
+  return (
+    <g>
+      <g transform={`rotate(${tilt} 180 238)`}>
+        <rect
+          x="112"
+          y="136"
+          width="152"
+          height="202"
+          rx="18"
+          fill={accent}
+          fillOpacity="0.16"
+        />
+        <rect
+          x="98"
+          y="122"
+          width="152"
+          height="202"
+          rx="18"
+          fill="#ffffff"
+          stroke={accent}
+          strokeWidth="3"
+        />
+        <rect
+          x="116"
+          y="142"
+          width="72"
+          height="14"
+          rx="7"
+          fill={accent}
+        />
+        {lineWidths.map((width, index) => (
+          <rect
+            key={index}
+            x="116"
+            y={176 + index * 18}
+            width={width}
+            height="7"
+            rx="3.5"
+            fill={ink}
+            fillOpacity="0.18"
+          />
+        ))}
+        <rect
+          x="116"
+          y="288"
+          width="46"
+          height="22"
+          rx="11"
+          fill={accent}
+          fillOpacity="0.14"
+        />
+        <text
+          x="139"
+          y="303"
+          textAnchor="middle"
+          fill={accent}
+          fontFamily="'DM Mono', monospace"
+          fontSize="10"
+        >
+          CSV
+        </text>
+        <rect
+          x="170"
+          y="288"
+          width="46"
+          height="22"
+          rx="11"
+          fill={accent}
+          fillOpacity="0.14"
+        />
+        <text
+          x="193"
+          y="303"
+          textAnchor="middle"
+          fill={accent}
+          fontFamily="'DM Mono', monospace"
+          fontSize="10"
+        >
+          TXT
+        </text>
+      </g>
 
-  if (category === 'computers') {
-    return <ComputersMotif accent={accent} ink={ink} variant={variant} />
-  }
+      <circle cx="260" cy="156" r="36" fill={accent} />
+      <text
+        x="260"
+        y="163"
+        textAnchor="middle"
+        fill="#ffffff"
+        fontFamily="'Baloo 2', sans-serif"
+        fontWeight="700"
+        fontSize="22"
+      >
+        {badge}
+      </text>
+    </g>
+  )
+}
 
-  return <PartsMotif accent={accent} ink={ink} variant={variant} />
+function GearMotif({ accent, ink, base }) {
+  return (
+    <g>
+      <rect
+        x="54"
+        y="286"
+        width="252"
+        height="102"
+        rx="24"
+        fill={base}
+        stroke={accent}
+        strokeWidth="2.5"
+        strokeDasharray="7 6"
+        strokeOpacity="0.7"
+      />
+      <path
+        d="M144 298c0-64 14-96 36-96s36 32 36 96c0 20-16 32-36 32s-36-12-36-32Z"
+        fill="#ffffff"
+        stroke={accent}
+        strokeWidth="3"
+      />
+      <path
+        d="M180 202v30"
+        stroke={accent}
+        strokeWidth="7"
+        strokeLinecap="round"
+      />
+      <path
+        d="M144 298h72"
+        stroke={accent}
+        strokeOpacity="0.4"
+        strokeWidth="3"
+        strokeLinecap="round"
+      />
+      <path
+        d="M160 232h-8M208 232h-8"
+        stroke={ink}
+        strokeOpacity="0.2"
+        strokeWidth="3"
+        strokeLinecap="round"
+      />
+      <circle
+        cx="248"
+        cy="318"
+        r="8"
+        fill={accent}
+        fillOpacity="0.2"
+      />
+      <path
+        d="M244 318h8M248 314v8"
+        stroke={accent}
+        strokeWidth="2"
+        strokeLinecap="round"
+      />
+    </g>
+  )
+}
+
+function Motif({ category, ...props }) {
+  if (category === 'chairs') return <ChairsMotif {...props} />
+  if (category === 'gpus') return <GraphicsCardMotif {...props} />
+  if (category === 'macs') return <MacsMotif {...props} />
+  if (category === 'wordlists') return <WordlistsMotif {...props} />
+  return <GearMotif {...props} />
 }
 
 export default function CoverArt({ item, className = '' }) {
@@ -327,41 +425,44 @@ export default function CoverArt({ item, className = '' }) {
       focusable="false"
     >
       <defs>
-        <linearGradient id={`${uid}-bg`} x1="0" y1="0" x2="0.9" y2="1">
+        <linearGradient id={`${uid}-bg`} x1="0" y1="0" x2="0.85" y2="1">
           <stop offset="0%" stopColor={base} />
-          <stop offset="100%" stopColor="#0b0a08" />
+          <stop offset="100%" stopColor="#fffdf8" />
         </linearGradient>
-        <radialGradient id={`${uid}-glow`} cx="50%" cy="44%" r="60%">
-          <stop offset="0%" stopColor={accent} stopOpacity="0.16" />
+        <radialGradient id={`${uid}-glow`} cx="50%" cy="40%" r="65%">
+          <stop offset="0%" stopColor={accent} stopOpacity="0.12" />
           <stop offset="100%" stopColor={accent} stopOpacity="0" />
         </radialGradient>
         <pattern
           id={`${uid}-grid`}
-          width="20"
-          height="20"
+          width="22"
+          height="22"
           patternUnits="userSpaceOnUse"
         >
           <path
-            d="M20 0H0v20"
+            d="M22 0H0v22"
             fill="none"
             stroke={ink}
-            strokeOpacity="0.055"
+            strokeOpacity="0.05"
           />
         </pattern>
       </defs>
 
       <rect width="360" height="460" fill={`url(#${uid}-bg)`} />
+      <circle cx="318" cy="76" r="124" fill={accent} fillOpacity="0.07" />
+      <circle cx="36" cy="402" r="98" fill={accent} fillOpacity="0.05" />
       <rect width="360" height="460" fill={`url(#${uid}-grid)`} />
       <rect width="360" height="460" fill={`url(#${uid}-glow)`} />
 
       <text
         x="180"
-        y="318"
+        y="342"
         textAnchor="middle"
-        fontFamily="Fraunces, Georgia, serif"
-        fontSize="218"
+        fontFamily="'Baloo 2', sans-serif"
+        fontWeight="700"
+        fontSize="220"
         fill={ink}
-        opacity="0.045"
+        fillOpacity="0.035"
       >
         {initial}
       </text>
@@ -370,88 +471,86 @@ export default function CoverArt({ item, className = '' }) {
         category={item.category}
         accent={accent}
         ink={ink}
+        base={base}
         variant={item.variant}
       />
 
       <rect
-        x="18.5"
-        y="18.5"
-        width="323"
-        height="423"
+        x="16.5"
+        y="16.5"
+        width="327"
+        height="427"
+        rx="24"
         fill="none"
         stroke={ink}
-        strokeOpacity="0.18"
-      />
-      <path
-        d="M18.5 38v-19.5H38M322 18.5h19.5V38M341.5 422v19.5H322M38 441.5H18.5V422"
-        fill="none"
-        stroke={accent}
-        strokeOpacity="0.55"
+        strokeOpacity="0.09"
       />
 
       <text
-        x="32"
-        y="44"
+        x="34"
+        y="46"
         fill={ink}
-        fillOpacity="0.6"
-        fontFamily="'Fira Code', monospace"
-        fontSize="8"
-        letterSpacing="2"
+        fillOpacity="0.55"
+        fontFamily="'Nunito', sans-serif"
+        fontWeight="800"
+        fontSize="11"
+        letterSpacing="1.6"
       >
         COLLECTIBLES KE
       </text>
       <text
-        x="328"
-        y="44"
+        x="326"
+        y="46"
         textAnchor="end"
         fill={accent}
-        fillOpacity="0.8"
-        fontFamily="'Fira Code', monospace"
-        fontSize="8"
-        letterSpacing="1.5"
+        fontFamily="'DM Mono', monospace"
+        fontSize="11"
+        letterSpacing="1.2"
       >
         {item.ref}
       </text>
       <path
-        d="M32 56h296"
+        d="M34 58h292"
         stroke={ink}
-        strokeOpacity="0.15"
+        strokeOpacity="0.12"
         strokeDasharray="1 5"
       />
 
       <text
-        x="32"
+        x="34"
         y="420"
         fill={accent}
-        fontFamily="'Fira Code', monospace"
-        fontSize="8"
-        letterSpacing="2"
+        fontFamily="'Nunito', sans-serif"
+        fontWeight="800"
+        fontSize="12"
+        letterSpacing="1.4"
       >
         {category.label.toUpperCase()}
       </text>
       <text
-        x="328"
+        x="326"
         y="420"
         textAnchor="end"
         fill={ink}
-        fillOpacity="0.55"
-        fontFamily="'Fira Code', monospace"
-        fontSize="8"
-        letterSpacing="2"
+        fillOpacity="0.5"
+        fontFamily="'Nunito', sans-serif"
+        fontWeight="700"
+        fontSize="12"
+        letterSpacing="1.2"
       >
         {item.year}
       </text>
       <text
         x="180"
-        y="420"
+        y="446"
         textAnchor="middle"
         fill={ink}
-        fillOpacity="0.35"
-        fontFamily="'Fira Code', monospace"
-        fontSize="7"
-        letterSpacing="2"
+        fillOpacity="0.34"
+        fontFamily="'DM Mono', monospace"
+        fontSize="9"
+        letterSpacing="1.8"
       >
-        ARCHIVE PLATE {String(item.variant).padStart(2, '0')}
+        DEMO ITEM · NOT REAL STOCK
       </text>
     </svg>
   )

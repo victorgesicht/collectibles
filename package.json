@@ -2,7 +2,7 @@
   "name": "collectibles-kenya",
   "private": true,
   "version": "1.0.0",
-  "description": "A dark, library-inspired trading catalogue for comics, games, vintage computers and parts.",
+  "description": "A friendly demo storefront for gaming gear, pre-owned M4 Macs, GPUs and synthetic Kenyan wordlists, with quiet guest checkout.",
   "type": "module",
   "scripts": {
     "dev": "vite",

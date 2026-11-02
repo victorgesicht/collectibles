@@ -1,14 +1,14 @@
 import { useDeferredValue, useMemo, useState } from 'react'
 import { CATALOG, CATEGORIES, getCategory } from '../data/catalog'
 import ItemCard from './ItemCard'
-import { CloseIcon, SearchIcon } from './Icons'
+import { CloseIcon, SearchIcon, SparklesIcon } from './Icons'
 
 const SORT_OPTIONS = [
-  { value: 'curated', label: "Curator's order" },
-  { value: 'newest', label: 'Recently accessioned' },
-  { value: 'value-high', label: 'Value: high to low' },
-  { value: 'value-low', label: 'Value: low to high' },
-  { value: 'title', label: 'Title: A to Z' },
+  { value: 'curated', label: 'Featured first' },
+  { value: 'newest', label: 'Newest first' },
+  { value: 'value-high', label: 'Price: high to low' },
+  { value: 'value-low', label: 'Price: low to high' },
+  { value: 'title', label: 'Name: A to Z' },
 ]
 
 const CATEGORY_COUNTS = CATEGORIES.reduce((counts, category) => {
@@ -87,34 +87,35 @@ export default function CatalogSection() {
   }
 
   return (
-    <section id="index" className="container-page scroll-mt-24 py-16 lg:py-24">
-      <div className="flex flex-col gap-8 border-b border-parchment/10 pb-8 lg:flex-row lg:items-end lg:justify-between">
+    <section id="index" className="container-page scroll-mt-32 py-16 lg:py-24">
+      <div className="flex flex-col gap-8 border-b border-ink/10 pb-8 lg:flex-row lg:items-end lg:justify-between">
         <div>
-          <p className="eyebrow">The index / Vol. 01</p>
-          <h2 className="display mt-4 max-w-xl text-4xl leading-[1.05] text-parchment sm:text-5xl">
-            On the shelf.
+          <p className="eyebrow">
+            <SparklesIcon className="h-4 w-4" />
+            Demo drop 01
+          </p>
+          <h2 className="display mt-3 max-w-xl text-4xl leading-[1.05] text-parchment sm:text-5xl">
+            Find your next upgrade.
           </h2>
-          <p className="mt-4 max-w-lg font-sans text-sm leading-7 text-muted">
-            Every piece is catalogued, graded and open to conversation. Filter
-            the stacks, then open a record to see the full condition notes.
+          <p className="mt-4 max-w-xl text-base leading-7 text-muted">
+            A small, honest demo catalogue. Every price is illustrative, every
+            product is labelled, and nothing gets charged.
           </p>
         </div>
 
-        <div className="flex items-center gap-6 font-mono text-[9px] uppercase tracking-[0.18em] text-muted">
+        <div className="flex flex-wrap items-center gap-x-6 gap-y-3 text-sm font-bold text-muted">
           <span>
-            <span className="text-parchment">
-              {String(CATALOG.length).padStart(2, '0')}
-            </span>{' '}
-            pieces
+            <span className="text-parchment">{CATALOG.length}</span> products
           </span>
-          <span className="h-4 w-px bg-parchment/15" aria-hidden="true" />
+          <span className="h-4 w-px bg-ink/15" aria-hidden="true" />
           <span>
-            <span className="text-parchment">04</span> departments
+            <span className="text-parchment">{CATEGORIES.length}</span>{' '}
+            departments
           </span>
-          <span className="h-4 w-px bg-parchment/15" aria-hidden="true" />
+          <span className="h-4 w-px bg-ink/15" aria-hidden="true" />
           <span className="flex items-center gap-2">
-            <span className="h-1.5 w-1.5 rounded-full bg-sage" />
-            Open
+            <span className="h-2 w-2 rounded-full bg-sage" />
+            Quiet checkout on
           </span>
         </div>
       </div>
@@ -130,15 +131,17 @@ export default function CatalogSection() {
               type="button"
               onClick={() => setCategory('all')}
               aria-pressed={category === 'all'}
-              className={`border px-3.5 py-2 font-mono text-[9px] uppercase tracking-[0.16em] transition-colors ${
+              className={`rounded-full border-2 px-4 py-2 text-sm font-bold transition-colors ${
                 category === 'all'
-                  ? 'border-brass bg-brass text-ink-950'
-                  : 'border-parchment/15 text-muted hover:border-brass/50 hover:text-parchment'
+                  ? 'border-brass bg-brass text-white'
+                  : 'border-ink/10 bg-ink-900 text-muted hover:border-brass/40 hover:text-parchment'
               }`}
             >
               All
-              <span className="ml-2">
-                {String(CATALOG.length).padStart(2, '0')}
+              <span
+                className={`ml-2 text-xs ${category === 'all' ? 'text-white/75' : 'text-muted'}`}
+              >
+                {CATALOG.length}
               </span>
             </button>
 
@@ -148,15 +151,17 @@ export default function CatalogSection() {
                 type="button"
                 onClick={() => setCategory(entry.id)}
                 aria-pressed={category === entry.id}
-                className={`border px-3.5 py-2 font-mono text-[9px] uppercase tracking-[0.16em] transition-colors ${
+                className={`rounded-full border-2 px-4 py-2 text-sm font-bold transition-colors ${
                   category === entry.id
-                    ? 'border-brass bg-brass text-ink-950'
-                    : 'border-parchment/15 text-muted hover:border-brass/50 hover:text-parchment'
+                    ? 'border-brass bg-brass text-white'
+                    : 'border-ink/10 bg-ink-900 text-muted hover:border-brass/40 hover:text-parchment'
                 }`}
               >
                 {entry.label}
-                <span className="ml-2">
-                  {String(CATEGORY_COUNTS[entry.id]).padStart(2, '0')}
+                <span
+                  className={`ml-2 text-xs ${category === entry.id ? 'text-white/75' : 'text-muted'}`}
+                >
+                  {CATEGORY_COUNTS[entry.id]}
                 </span>
               </button>
             ))}
@@ -164,38 +169,38 @@ export default function CatalogSection() {
 
           <div className="flex w-full items-center gap-3 sm:w-auto">
             <label htmlFor="catalog-search" className="sr-only">
-              Search the catalog
+              Search the catalogue
             </label>
-            <div className="relative flex-1 sm:w-64 sm:flex-none">
-              <SearchIcon className="pointer-events-none absolute left-3 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted" />
+            <div className="relative flex-1 sm:w-72 sm:flex-none">
+              <SearchIcon className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted" />
               <input
                 id="catalog-search"
                 type="search"
                 value={query}
                 onChange={(event) => setQuery(event.target.value)}
-                placeholder="Search titles, makers, tags"
-                className="field !py-2.5 pl-9 pr-9 font-mono text-[10px] uppercase tracking-[0.08em]"
+                placeholder="Search chairs, GPUs, Macs…"
+                className="field !py-2.5 pl-10 pr-10 text-sm"
               />
               {query && (
                 <button
                   type="button"
                   onClick={() => setQuery('')}
-                  className="absolute right-2 top-1/2 flex h-6 w-6 -translate-y-1/2 items-center justify-center text-muted transition-colors hover:text-parchment"
+                  className="absolute right-2 top-1/2 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full text-muted transition-colors hover:bg-ink-800 hover:text-parchment"
                   aria-label="Clear search"
                 >
-                  <CloseIcon className="h-3.5 w-3.5" />
+                  <CloseIcon className="h-4 w-4" />
                 </button>
               )}
             </div>
 
             <label htmlFor="catalog-sort" className="sr-only">
-              Sort the catalog
+              Sort the catalogue
             </label>
             <select
               id="catalog-sort"
               value={sort}
               onChange={(event) => setSort(event.target.value)}
-              className="field w-full !py-2.5 font-mono text-[10px] uppercase tracking-[0.06em] sm:w-auto"
+              className="field w-full !py-2.5 text-sm sm:w-auto"
             >
               {SORT_OPTIONS.map((option) => (
                 <option key={option.value} value={option.value}>
@@ -206,21 +211,20 @@ export default function CatalogSection() {
           </div>
         </div>
 
-        <div className="mt-5 flex items-center justify-between border-t border-parchment/[0.07] pt-4">
-          <p
-            className="font-mono text-[9px] uppercase tracking-[0.16em] text-muted"
-            aria-live="polite"
-          >
+        <div className="mt-5 flex items-center justify-between gap-4 border-t border-ink/10 pt-4 text-sm text-muted">
+          <p aria-live="polite">
             Showing{' '}
-            <span className="text-parchment">{filteredItems.length}</span> of{' '}
-            {CATALOG.length} records
+            <span className="font-bold text-parchment">
+              {filteredItems.length}
+            </span>{' '}
+            of {CATALOG.length} demo products
           </p>
 
           {hasActiveFilters && (
             <button
               type="button"
               onClick={resetFilters}
-              className="font-mono text-[9px] uppercase tracking-[0.16em] text-brass transition-colors hover:text-brass-light"
+              className="font-bold text-brass transition-colors hover:text-brass-dark"
             >
               Reset filters
             </button>
@@ -235,14 +239,16 @@ export default function CatalogSection() {
           ))}
         </div>
       ) : (
-        <div className="mt-8 flex flex-col items-center border border-dashed border-parchment/15 px-6 py-20 text-center">
-          <SearchIcon className="h-6 w-6 text-brass/70" />
-          <h3 className="mt-5 font-display text-2xl text-parchment">
-            Nothing on this shelf.
+        <div className="mt-8 flex flex-col items-center rounded-3xl border border-dashed border-brass/30 bg-ink-900/60 px-6 py-20 text-center">
+          <span className="grid h-14 w-14 place-items-center rounded-full bg-brass/10 text-brass">
+            <SearchIcon className="h-6 w-6" />
+          </span>
+          <h3 className="display mt-5 text-3xl text-parchment">
+            Nothing matches that yet.
           </h3>
-          <p className="mt-2 max-w-sm font-sans text-sm leading-6 text-muted">
-            Try a different department or a broader search. The catalogue is
-            always changing.
+          <p className="mt-2 max-w-sm text-base leading-7 text-muted">
+            Try a different department or a shorter search. The demo shelf is
+            small and friendly.
           </p>
           <button
             type="button"

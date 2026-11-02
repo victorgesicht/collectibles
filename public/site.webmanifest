@@ -1,11 +1,11 @@
 {
   "name": "Collectibles Kenya",
   "short_name": "Collectibles KE",
-  "description": "A trading library for comics, games, vintage computers and parts.",
+  "description": "A friendly demo store for gaming gear, Macs, GPUs and Kenyan wordlists.",
   "start_url": "./",
   "display": "standalone",
-  "background_color": "#0b0a08",
-  "theme_color": "#0b0a08",
+  "background_color": "#fdf7ed",
+  "theme_color": "#fdf7ed",
   "icons": [
     {
       "src": "./favicon.svg",

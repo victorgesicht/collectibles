@@ -4,6 +4,7 @@ import App from './App'
 import './index.css'
 import AuthProvider from './state/AuthProvider'
 import BinderProvider from './state/BinderProvider'
+import CartProvider from './state/CartProvider'
 import ToastProvider from './state/ToastProvider'
 
 createRoot(document.getElementById('root')).render(
@@ -11,7 +12,9 @@ createRoot(document.getElementById('root')).render(
     <ToastProvider>
       <AuthProvider>
         <BinderProvider>
-          <App />
+          <CartProvider>
+            <App />
+          </CartProvider>
         </BinderProvider>
       </AuthProvider>
     </ToastProvider>

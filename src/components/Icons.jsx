@@ -118,3 +118,102 @@ export function ShieldIcon({ className = 'h-4 w-4' }) {
     </svg>
   )
 }
+
+export function CartIcon({ className = 'h-4 w-4' }) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} {...baseProps}>
+      <path d="M3.5 4.5h2l2.2 10.2a2 2 0 0 0 2 1.6h7.9a2 2 0 0 0 2-1.6l1.4-6.7H6.5" />
+      <circle cx="10" cy="19.5" r="1.3" />
+      <circle cx="17.5" cy="19.5" r="1.3" />
+    </svg>
+  )
+}
+
+export function MinusIcon({ className = 'h-4 w-4' }) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} {...baseProps}>
+      <path d="M5 12h14" />
+    </svg>
+  )
+}
+
+export function PlusIcon({ className = 'h-4 w-4' }) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} {...baseProps}>
+      <path d="M12 5v14M5 12h14" />
+    </svg>
+  )
+}
+
+export function TrashIcon({ className = 'h-4 w-4' }) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} {...baseProps}>
+      <path d="M4.5 7.5h15M9.5 7.5V5.5h5v2M7 7.5l1 12h8l1-12" />
+      <path d="M10.5 11v5.5M13.5 11v5.5" />
+    </svg>
+  )
+}
+
+export function TruckIcon({ className = 'h-4 w-4' }) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} {...baseProps}>
+      <path d="M3.5 6.5h10v10h-10zM13.5 10h4l3 3v3.5h-7" />
+      <circle cx="7.5" cy="18" r="1.6" />
+      <circle cx="17" cy="18" r="1.6" />
+    </svg>
+  )
+}
+
+export function LockIcon({ className = 'h-4 w-4' }) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} {...baseProps}>
+      <rect x="5" y="10.5" width="14" height="9.5" rx="2" />
+      <path d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5" />
+      <path d="M12 14.5v2" />
+    </svg>
+  )
+}
+
+export function MapPinIcon({ className = 'h-4 w-4' }) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} {...baseProps}>
+      <path d="M12 21s6.5-5.6 6.5-10.5a6.5 6.5 0 0 0-13 0C5.5 15.4 12 21 12 21Z" />
+      <circle cx="12" cy="10.5" r="2.2" />
+    </svg>
+  )
+}
+
+export function PhoneIcon({ className = 'h-4 w-4' }) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} {...baseProps}>
+      <path d="M7 3.5h3l1.5 4-2 1.5a11 11 0 0 0 5.5 5.5l1.5-2 4 1.5v3a2 2 0 0 1-2.2 2A16.5 16.5 0 0 1 5 5.7 2 2 0 0 1 7 3.5Z" />
+    </svg>
+  )
+}
+
+export function MailIcon({ className = 'h-4 w-4' }) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} {...baseProps}>
+      <rect x="3.5" y="5.5" width="17" height="13" rx="2" />
+      <path d="m4.5 7 7.5 6 7.5-6" />
+    </svg>
+  )
+}
+
+export function SparklesIcon({ className = 'h-4 w-4' }) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} {...baseProps}>
+      <path d="M12 3.5 13.7 9l5.5 1.7-5.5 1.7L12 18l-1.7-5.6L4.8 10.7 10.3 9 12 3.5Z" />
+      <path d="M19 16.5 19.8 19l2.5.8-2.5.8L19 23l-.8-2.4-2.5-.8 2.5-.8L19 16.5Z" />
+    </svg>
+  )
+}
+
+export function PackageIcon({ className = 'h-4 w-4' }) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} {...baseProps}>
+      <path d="m12 3.5 8 4.3v8.4l-8 4.3-8-4.3V7.8l8-4.3Z" />
+      <path d="m4.5 8 7.5 4 7.5-4M12 12v8.5" />
+    </svg>
+  )
+}

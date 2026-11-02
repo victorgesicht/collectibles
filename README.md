@@ -1,6 +1,6 @@
 # Collectibles Kenya
 
-A dark, library-inspired trading catalogue for comics, games, vintage computers and parts. Built as a fully static React site with a searchable index, item records, a local binder and a preview collector-card flow.
+A friendly demo storefront for gaming chairs, graphics cards, pre-owned M4 Macs, gaming gear and synthetic Kenyan wordlists. Built as a static React site with a calm catalogue, a cart, guest B2C checkout and a Daraja/M-Pesa integration point.
 
 ## Run it
 
@@ -12,35 +12,65 @@ npm run preview
 npm run lint
 ```
 
-The production build is written to `dist/` and is served as plain static files. Vite uses a relative base, so it works at a domain root or a sub-path (for example GitHub Pages).
+The production build is written to `dist/` and served as plain static files. Vite uses a relative base, so it works at a domain root or a sub-path.
 
 ## Pages
 
-- **Index** (`#/`) — hero, featured acquisition, searchable/filterable catalogue and trade-desk notes.
-- **Record** (`#/item/:id`) — condition notes, specs, estimated value, binder action and trade dialog.
-- **Binder** (`#/binder`) — locally saved pieces and their combined estimated value.
-- **Collector cards** (`#/account`) — create/sign in, profile card, binder summary and logged trade requests.
+- **Shop** (`#/`) — hero, featured product, searchable/filterable demo catalogue and quiet checkout explainer.
+- **Product** (`#/item/:id`) — product story, specs, quantity, add to cart, “Buy quietly”, save and an optional offer dialog.
+- **Cart** (`#/cart`) — quantities, removal and subtotal.
+- **Quiet checkout** (`#/checkout`) — guest B2C checkout with SMS-first contact, delivery choice, discreet packaging and M-Pesa/pay-on-delivery selection.
+- **Order** (`#/order/:id`) — receipt, masked contact details, totals, timeline and print view.
+- **Saved items** (`#/binder`) — local shortlist with add-to-cart actions.
+- **Account** (`#/account`) — optional local account for saved items and offers; never required for checkout.
 
-## Account and trade preview
+## Demo catalogue
 
-This repository is a static showcase, not a backend. Accounts, sessions, binders and trade requests are stored in `localStorage` under the `collectibles-ke:*` namespace. Passwords are salted and hashed with PBKDF2 via the Web Crypto API before storage, but client-side auth is still **not** production authentication.
+- Rimsticks gaming chairs.
+- New and pre-owned GPUs.
+- Pre-owned M4 MacBook Pro and MacBook Air.
+- Two synthetic Kenyan wordlist datasets (10M and 1M generated records). No personal data is included.
+- Rimsticks gaming mouse and XXL desk mat.
 
-Before using real accounts or private data, replace `src/lib/auth.js` and `src/lib/trades.js` with calls to a trusted backend or auth provider. The UI and state providers are intentionally isolated so that swap can happen without redesigning the pages.
+All products, prices and stock are illustrative. Nothing is charged.
+
+## Quiet checkout and Daraja
+
+Guest checkout is the main B2C path: no account, no calls, no haggling. The order form collects only what is needed for delivery and stores the order in this browser.
+
+`src/lib/daraja.js` is a deliberately disconnected placeholder. It never sends an STK push and never takes payment. When Daraja is added:
+
+- Put consumer key, secret, passkey and shortcode on a server, never in this client.
+- Call Daraja from a trusted server endpoint and return only a safe status to the browser.
+- Verify and reconcile callbacks server-side before marking an order paid.
+- Replace local order storage with an authenticated backend.
+
+## Security notes
+
+- Fonts are self-hosted; the app makes no third-party font requests.
+- `public/_headers` contains CSP, HSTS, COOP/CORP, clickjacking and permissions policies for Netlify-style hosts.
+- Accounts, saved items, carts and orders use `localStorage`; this is a demo, not production auth or storage.
+- Passwords are salted and hashed with PBKDF2 via Web Crypto, but client-side auth can still be bypassed. Do not use real credentials or real personal data.
+- Order totals are recomputed from `src/data/catalog.js` instead of trusting stored cart values.
+- Checkout and order routes are marked `noindex, nofollow`.
+
+See [SECURITY.md](./SECURITY.md) for the audit summary and deferred work.
 
 ## Project structure
 
 ```text
 src/
-  components/     UI, catalogue cards, archive artwork and navigation
-  data/           Catalogue records and category metadata
+  assets/fonts/   Self-hosted Baloo 2, Nunito and DM Mono files
+  components/     UI, product cards, artwork and navigation
+  data/           Demo catalogue and categories
   hooks/          Hash-based routing
-  lib/            Formatting, local storage, auth and trade persistence
-  pages/          Home, item detail, binder, account and 404
-  state/          Auth, binder and toast providers
+  lib/            Formatting, storage, auth, trades, cart, orders and Daraja placeholder
+  pages/          Shop, product, cart, checkout, order, saved, account and 404
+  state/          Auth, binder, cart and toast providers
 ```
 
-## Deployment notes
+## Deployment
 
-- `public/_headers` includes baseline security headers and immutable asset caching for Netlify-style hosts. Other hosts can ignore it or translate the rules.
-- Fonts are loaded from Google Fonts. Self-host them if the deployment requires a strict third-party content policy.
-- Update the catalogue in `src/data/catalog.js`; cards, filters, counts and records are all derived from that file.
+- Serve `dist/` over HTTPS.
+- Apply `public/_headers` on Netlify or translate the rules to your host. The CSP assumes self-hosted assets only.
+- Replace the demo auth, order storage and payment adapter before accepting real orders.

@@ -64,20 +64,20 @@ export default function ToastProvider({ children }) {
         {toasts.map((toast) => (
           <div
             key={toast.id}
-            className="pointer-events-auto flex max-w-md items-center gap-3 border border-brass/30 bg-ink-800 px-4 py-3 text-sm text-parchment shadow-shelf animate-fade-up"
+            className="pointer-events-auto flex max-w-md animate-fade-up items-center gap-3 rounded-2xl border border-ink/10 bg-ink-900 px-4 py-3 text-sm text-parchment shadow-lift"
             role="status"
           >
             <span
-              className={`h-1.5 w-1.5 shrink-0 rounded-full ${
+              className={`h-2 w-2 shrink-0 rounded-full ${
                 toast.tone === 'success' ? 'bg-sage' : 'bg-brass'
               }`}
               aria-hidden="true"
             />
-            <p className="leading-snug">{toast.message}</p>
+            <p className="font-bold leading-snug">{toast.message}</p>
             <button
               type="button"
               onClick={() => dismiss(toast.id)}
-              className="ml-2 shrink-0 font-mono text-xs uppercase tracking-[0.16em] text-muted transition-colors hover:text-parchment"
+              className="ml-2 shrink-0 rounded-full px-2 py-1 text-xs font-bold text-muted transition-colors hover:bg-ink-800 hover:text-parchment"
             >
               Close
             </button>

@@ -1,10 +1,42 @@
+@font-face {
+  font-family: 'Baloo 2';
+  src: url('./assets/fonts/baloo2-latin.woff2') format('woff2');
+  font-weight: 600 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Nunito';
+  src: url('./assets/fonts/nunito-latin.woff2') format('woff2');
+  font-weight: 400 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'DM Mono';
+  src: url('./assets/fonts/dmmono-400-latin.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'DM Mono';
+  src: url('./assets/fonts/dmmono-500-latin.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   :root {
-    color-scheme: dark;
+    color-scheme: light;
   }
 
   html {
@@ -13,17 +45,22 @@
   }
 
   body {
-    @apply bg-ink-950 font-sans text-parchment antialiased;
+    @apply bg-ink-950 font-sans text-[15px] leading-7 text-parchment antialiased sm:text-base;
     background-image:
       radial-gradient(
-        ellipse 80% 55% at 50% -15%,
-        rgba(201, 169, 110, 0.09),
+        ellipse 70% 50% at 12% -10%,
+        rgba(185, 78, 26, 0.11),
+        transparent 62%
+      ),
+      radial-gradient(
+        ellipse 55% 45% at 100% 5%,
+        rgba(31, 122, 104, 0.1),
         transparent 65%
       ),
       radial-gradient(
-        ellipse 55% 45% at 100% 20%,
-        rgba(143, 184, 160, 0.05),
-        transparent 70%
+        ellipse 60% 45% at 50% 105%,
+        rgba(244, 183, 64, 0.09),
+        transparent 65%
       );
     background-attachment: fixed;
     min-height: 100vh;
@@ -35,20 +72,30 @@
     z-index: 30;
     pointer-events: none;
     content: '';
-    opacity: 0.028;
+    opacity: 0.018;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 220 220' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   }
 
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
   ::selection {
-    background: rgba(201, 169, 110, 0.28);
-    color: #fff9ed;
+    background: rgba(185, 78, 26, 0.18);
+    color: #2e241b;
   }
 
   :focus-visible {
     outline: none;
     box-shadow:
-      0 0 0 2px #0b0a08,
-      0 0 0 4px rgba(201, 169, 110, 0.85);
+      0 0 0 2px #fdf7ed,
+      0 0 0 4px rgba(185, 78, 26, 0.72);
   }
 
   ::-webkit-scrollbar {
@@ -57,17 +104,17 @@
   }
 
   ::-webkit-scrollbar-track {
-    background: #0b0a08;
+    background: #fdf7ed;
   }
 
   ::-webkit-scrollbar-thumb {
-    background: #2c271e;
-    border: 3px solid #0b0a08;
+    background: #dcc6ab;
+    border: 3px solid #fdf7ed;
     border-radius: 999px;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: #8f7444;
+    background: #b94e1a;
   }
 }
 
@@ -77,44 +124,52 @@
   }
 
   .eyebrow {
-    @apply font-mono text-[10px] uppercase tracking-[0.28em] text-brass;
+    @apply inline-flex items-center gap-2 font-sans text-xs font-extrabold uppercase tracking-[0.14em] text-brass;
   }
 
   .display {
-    @apply font-display font-normal tracking-[-0.035em];
+    @apply font-display font-semibold tracking-[-0.02em];
+  }
+
+  .surface {
+    @apply rounded-3xl border border-ink/10 bg-ink-900 shadow-card;
+  }
+
+  .chip {
+    @apply inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-bold;
   }
 
   .btn {
-    @apply inline-flex items-center justify-center gap-2 border px-5 py-3 font-mono text-[10px] uppercase tracking-[0.2em] transition duration-200;
+    @apply inline-flex min-h-[44px] items-center justify-center gap-2 rounded-full border-2 px-5 py-2.5 text-sm font-bold transition duration-200;
   }
 
   .btn-primary {
-    @apply btn border-brass bg-brass text-ink-950 hover:border-brass-light hover:bg-brass-light;
+    @apply btn border-brass bg-brass text-white hover:border-brass-light hover:bg-brass-light;
   }
 
   .btn-secondary {
-    @apply btn border-parchment/20 bg-transparent text-parchment hover:border-brass/70 hover:text-brass-light;
+    @apply btn border-ink/15 bg-ink-900 text-parchment hover:border-brass/50 hover:text-brass-dark;
   }
 
   .btn-ghost {
-    @apply inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.18em] text-muted transition-colors hover:text-brass-light;
+    @apply inline-flex min-h-[44px] items-center gap-2 text-sm font-bold text-muted transition-colors hover:text-brass-dark;
   }
 
   .field {
-    @apply w-full border border-parchment/15 bg-ink-950/70 px-4 py-3 font-sans text-sm text-parchment placeholder:text-muted/50 transition-colors focus:border-brass/70 focus:outline-none;
+    @apply w-full rounded-xl border border-ink/15 bg-ink-900 px-4 py-3 font-sans text-base text-parchment placeholder:text-muted/60 transition-colors focus:border-brass/70 focus:outline-none focus:ring-4 focus:ring-brass/10;
   }
 
   .field-label {
-    @apply mb-2 block font-mono text-[10px] uppercase tracking-[0.2em] text-muted;
+    @apply mb-2 block font-sans text-sm font-bold text-parchment;
   }
 
   .hero-grid {
     background-image:
-      linear-gradient(to right, rgba(238, 230, 215, 0.035) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(238, 230, 215, 0.035) 1px, transparent 1px);
-    background-size: 84px 84px;
-    -webkit-mask-image: linear-gradient(to bottom, black, transparent 88%);
-    mask-image: linear-gradient(to bottom, black, transparent 88%);
+      linear-gradient(to right, rgba(46, 36, 27, 0.055) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(46, 36, 27, 0.055) 1px, transparent 1px);
+    background-size: 72px 72px;
+    -webkit-mask-image: linear-gradient(to bottom, black, transparent 92%);
+    mask-image: linear-gradient(to bottom, black, transparent 92%);
   }
 }
 
@@ -122,6 +177,16 @@
   main:focus {
     outline: none;
     box-shadow: none;
+  }
+}
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+
+  body {
+    background: #ffffff;
   }
 }
 
